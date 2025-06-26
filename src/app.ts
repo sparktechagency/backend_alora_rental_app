@@ -8,6 +8,8 @@ import notFound from './app/middlewares/notFount';
 import path from 'path';
 import morgan from 'morgan';
 import { sendEncryptedFileController } from './app/modules/send_file/controller/sendEncryptedFile.controller';
+import { APPLICATION_NAME } from './data/environmentVariables';
+import { repetitiveTasks } from './helpers_v2/repeatable_tasks/repeatableasks';
 
 const app = express();
 
@@ -38,7 +40,7 @@ app.use(router);
 
 // live response
 app.get('/', (req: Request, res: Response) => {
-  res.status(201).json({ message: 'Express server started' });
+  res.status(201).json({ message: `${APPLICATION_NAME} server started` });
 });
 
 // global error handle
@@ -46,5 +48,5 @@ app.use(globalErrorHandler);
 
 // handle not found route
 app.use(notFound);
-
+repetitiveTasks();
 export default app;

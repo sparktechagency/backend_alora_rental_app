@@ -14,14 +14,20 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     email: { type: String, required: true, unique: true },
+    isEmailVerified: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
     phone: {
       type: String,
       required: false,
     },
     passwordHash: { type: String, required: false },
+    verificationOtp: { type: Number, required: false },
     role: {
       type: String,
-      enum: ['user', 'driver', 'admin'],
+      enum: ['renter', 'owner', 'maintenance_crew'],
       required: true,
     },
     isBanned: {
@@ -29,6 +35,7 @@ const userSchema = new mongoose.Schema(
       default: false,
       required: true,
     },
+
     profilePictureUrl: {
       type: String,
       required: false,
@@ -60,3 +67,4 @@ const userSchema = new mongoose.Schema(
 );
 
 export const userModel = mongoose.model('users', userSchema);
+export const UserModel = userModel;

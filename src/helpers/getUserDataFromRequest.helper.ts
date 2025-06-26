@@ -29,6 +29,9 @@ export const getUserDataFromRequest2: fType = (req: any) => {
       if (!userData) {
         throw new Error('USER_DOES_NOT_EXISTS');
       }
+      if (!userData.isEmailVerified) {
+        throw new Error('account is not verified');
+      }
       resolve(userData);
     } catch (error) {
       console.log(error);

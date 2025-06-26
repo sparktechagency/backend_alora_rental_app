@@ -115,14 +115,17 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
     message = error.message;
   } else if (
     typeof error === 'string' &&
-    (error.includes('not have permission') || error.includes('not admin'))
+    (error.includes('not have permission') ||
+      error.includes('not admin') ||
+      error.includes('not verified'))
   ) {
     code = StatusCodes.UNAUTHORIZED;
     message = error;
   } else if (
     error instanceof Error &&
     (error.message.includes('not have permission') ||
-      error.message.includes('not admin'))
+      error.message.includes('not admin') ||
+      error.message.includes('not verified'))
   ) {
     code = StatusCodes.UNAUTHORIZED;
     message = error.message;
@@ -133,7 +136,8 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
       error.includes('not valid') ||
       error.includes('please give') ||
       error.includes('please turn on') ||
-      error.includes('is not requestable'))
+      error.includes('is not requestable') ||
+      error.includes('please provide'))
   ) {
     code = StatusCodes.BAD_REQUEST;
     message = error;
@@ -144,7 +148,8 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
       error.message.includes('not valid') ||
       error.message.includes('please give') ||
       error.message.includes('please turn on') ||
-      error.message.includes('is not requestable'))
+      error.message.includes('is not requestable') ||
+      error.message.includes('please provide'))
   ) {
     code = StatusCodes.BAD_REQUEST;
     message = error.message;
@@ -155,7 +160,8 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
       error === 'plz complete your ongoing trip first' ||
       error === 'you already accepted this' ||
       error === 'you already rejected this trip' ||
-      error.includes('you already have'))
+      error.includes('you already have') ||
+      error.includes('already exist'))
   ) {
     code = StatusCodes.CONFLICT;
     message = error;
@@ -166,7 +172,8 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
       error.message === 'plz complete your ongoing trip first' ||
       error.message === 'you already accepted this' ||
       error.message === 'you already rejected this trip' ||
-      error.message.includes('you already have'))
+      error.message.includes('you already have') ||
+      error.message.includes('already exist'))
   ) {
     code = StatusCodes.CONFLICT;
     message = error.message;
