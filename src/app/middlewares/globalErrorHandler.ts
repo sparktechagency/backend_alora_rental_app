@@ -137,7 +137,8 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
       error.includes('please give') ||
       error.includes('please turn on') ||
       error.includes('is not requestable') ||
-      error.includes('please provide'))
+      error.includes('please provide') ||
+      error.includes('missing'))
   ) {
     code = StatusCodes.BAD_REQUEST;
     message = error;
@@ -149,7 +150,8 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
       error.message.includes('please give') ||
       error.message.includes('please turn on') ||
       error.message.includes('is not requestable') ||
-      error.message.includes('please provide'))
+      error.message.includes('please provide') ||
+      error.message.includes('missing'))
   ) {
     code = StatusCodes.BAD_REQUEST;
     message = error.message;
